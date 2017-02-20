@@ -20,13 +20,13 @@ We use Montserrat for titles and Lato for copy. Both are Google Fonts.
 Copies of the logo are in the /img folder for the two sizes in the comp.
 
 ##### Colors
-Text (normal): 	#333A39
-Text (med): 	#605E5E
-Text (light): 	#979797
-Lines: 			#9C9C9C
-Brand Green: 	#008B78
-Blue: 			#137ABE
-Red: 			#BE1413
+ - Text (normal): 	#333A39
+ - Text (med): 	#605E5E
+ - Text (light): 	#979797
+ - Lines: 			#9C9C9C
+ - Brand Green: 	#008B78
+ - Blue: 			#137ABE
+ - Red: 			#BE1413
 
 ## Third Party Libraries
 You may include any third party software you like. Please be ready to tell us how you decided on it and what you did to integrate it.
@@ -37,6 +37,7 @@ You may include any third party software you like. Please be ready to tell us ho
  - Users are limited to 3 watchlists.
  - Watchlists update gracefully
  - Watchlists (which hashtags are being monitored, along with any settings, but not the actual tweets) are persisted one way or another. Local storage or a db are fine.
+ - Replace the README with your own telling us where to find your code running (heroku or whatnot) or how to spin it up.
 
 ##### Bonus
  - Users can set the number of tweets per watchlist (default is 5)
