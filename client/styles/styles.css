@@ -1,0 +1,64 @@
+
+/* Navbar Component */
+.navbar-default {
+  padding: 16px;
+}
+.navbar .navbar-default .container {
+  padding-left: 140px;
+  padding-right: 140px;
+}
+.navbar-default .navbar-nav > li > a {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-family: 'Lato', sans-serif;
+  color: #333A39;
+}
+.navbar-default ul li a {
+  padding: 0px;
+  margin: 12px;
+}
+.navbar-default .navbar-nav > li > a:hover {
+  color: #008B78;
+  text-decoration: none;
+  border-bottom: 4px solid #008B78;
+}
+.navbar {
+  background-color: white;
+}
+#button-signup {
+  color: white;
+  padding: 8px;
+  margin: 0px;
+  border-radius: 3px;
+  font-size: inherit;
+  font-family: inherit;
+  text-decoration: none;
+  text-transform: inherit;
+  background-color: #008B78;
+}
+a:hover #button-signup {
+  background-color: #189f8c;
+  box-shadow: 2px 2px 1px rgb(210,210,210);
+}
+/* Search Component */
+.search-container {
+  font-family: 'Montserrat', sans-serif;
+  width:50%;
+  padding:10px;
+  margin:auto;
+}
+.input-group-addon {
+  font-size: 20px;
+  color: white;
+  background-color: #008B78;
+  border: 1px dotted transparent;
+}
+#searchbar {
+  padding:6px;
+  display: block;
+  font-size: 24px;
+  border: 1px solid;
+  background-color: transparent;
+}
+
+/*Form Component*/
