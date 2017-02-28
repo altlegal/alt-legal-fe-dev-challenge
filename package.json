@@ -1,0 +1,45 @@
+{
+  "name": "altlegal",
+  "version": "1.0.0",
+  "description": "Twitter api application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "build": "webpack -p",
+    "dev": "webpack -d --watch",
+    "webpack": "webpack --progress --colors --watch"
+  },
+  "keywords": [
+    "twitter",
+    "api",
+    "react"
+  ],
+  "author": "Yueh Chou",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-1": "^6.22.0",
+    "body-parser": "^1.16.1",
+    "bootstrap": "^3.3.7",
+    "cors": "^2.8.1",
+    "express": "^4.14.1",
+    "file-loader": "^0.10.1",
+    "jquery": "^3.1.1",
+    "nodemon": "^1.11.0",
+    "path": "^0.12.7",
+    "react": "^15.4.2",
+    "react-bootstrap": "^0.30.7",
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.2",
+    "request": "^2.79.0",
+    "twitter": "^1.7.0",
+    "webpack": "^2.2.1"
+  }
+}
