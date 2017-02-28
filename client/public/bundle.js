@@ -20745,11 +20745,12 @@ var Main = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
     _this.state = {
-      search: '', // Keyword search
+      search: 'nintendo', // Keyword search
       trends: [], // Trending Tags we want to know
       tweets: [] // Tweets related to the hashtag
     };
     _this.getTrends = _this.getTrends.bind(_this);
+    _this.getTweets = _this.getTweets.bind(_this);
     return _this;
   }
 
@@ -20757,6 +20758,7 @@ var Main = function (_React$Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       this.getTrends();
+      this.getTweets();
     }
     /* GET / POST Requests to Node.js */
 
@@ -20766,10 +20768,24 @@ var Main = function (_React$Component) {
       var _this2 = this;
 
       _axios2.default.get('/api/getTrends').then(function (response) {
-        _this2.setState({ trends: response });
+        _this2.setState({ trends: response.data });
         console.log(response);
       }).catch(function (response) {
         console.log(response);
+      });
+    }
+  }, {
+    key: 'getTweets',
+    value: function getTweets() {
+      var _this3 = this;
+
+      _axios2.default.post('/api/getTweets', {
+        hashtag: this.state.search
+      }).then(function (response) {
+        console.log('tweet response', response.data);
+        _this3.setState({ tweets: response.data });
+        // console.log('response', response)
+        console.log('saved successfully');
       });
     }
     /* end of Get / Post Requests to Node.js */
@@ -20788,7 +20804,7 @@ var Main = function (_React$Component) {
             _reactBootstrap.Col,
             { xs: 6, md: 4 },
             '1 of 3',
-            _react2.default.createElement(_tweetform2.default, { data: this.state.trends })
+            _react2.default.createElement(_tweetform2.default, { data: this.state.tweets, tag: this.state.search })
           ),
           _react2.default.createElement(
             _reactBootstrap.Col,
@@ -21046,15 +21062,42 @@ var TweetForm = function (_React$Component) {
       // Create a custom function
       // Gets a tweet data with specific hashtag
       // For each message with hash tag return as Listgroup Item
-      var listTweets = function listTweets(trends) {
-        console.log('###data##', trends);
-        trends.data.forEach(function (tweet) {
-          return _react2.default.createElement(
-            _reactBootstrap.ListGroupItem,
-            null,
-            tweet
-          );
-        });
+      /* Get Trending Hashtags */
+      // const listTrends = (trends) => {
+      //   console.log('###data##', trends)
+      //   if(trends.length >= 0){
+      //     return trends.map((trend, i) => {
+      //       return <ListGroupItem key={i}>{trend.name}</ListGroupItem>
+      //     })
+      //   }
+      // }
+      /* Get Tweets from the selected hashtag */
+      var listTweets = function listTweets(tweets) {
+        console.log('###tweets###', tweets);
+        if (tweets.length >= 0) {
+          return tweets.map(function (tweet, i) {
+            return _react2.default.createElement(
+              _reactBootstrap.ListGroupItem,
+              { key: i },
+              _react2.default.createElement('img', { src: tweet.img }),
+              _react2.default.createElement(
+                'h1',
+                null,
+                tweet.username
+              ),
+              _react2.default.createElement(
+                'h2',
+                null,
+                tweet.name
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                tweet.text
+              )
+            );
+          });
+        }
       };
       console.log('props', this.props.data);
       return _react2.default.createElement(
@@ -21063,7 +21106,8 @@ var TweetForm = function (_React$Component) {
         _react2.default.createElement(
           _reactBootstrap.ListGroup,
           null,
-          listTweets(this.state.data),
+          _react2.default.createElement(_reactBootstrap.ListGroupItem, { header: '#' + this.props.tag }),
+          listTweets(this.props.data),
           _react2.default.createElement(
             _reactBootstrap.ListGroupItem,
             null,

@@ -62,3 +62,6 @@ a:hover #button-signup {
 }
 
 /*Form Component*/
+.tweet-form {
+  font-family: 'Montserrat', sans-serif;
+}
