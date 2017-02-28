@@ -1,6 +1,7 @@
 
 /* Navbar Component */
 .navbar-default {
+  margin:0px;
   padding: 16px;
 }
 .navbar .navbar-default .container {
@@ -23,7 +24,9 @@
   border-bottom: 4px solid #008B78;
 }
 .navbar {
+  border-color: transparent;
   background-color: white;
+  margin:0px;
 }
 #button-signup {
   color: white;
@@ -44,7 +47,7 @@ a:hover #button-signup {
 .search-container {
   font-family: 'Montserrat', sans-serif;
   width:50%;
-  padding:10px;
+  padding:20px;
   margin:auto;
 }
 .input-group-addon {
@@ -60,8 +63,42 @@ a:hover #button-signup {
   border: 1px solid;
   background-color: transparent;
 }
-
+/* Main Component */
+.main {
+  background-color: #dddddd;
+}
+.main-tweet {
+}
 /*Form Component*/
+h1,h2,h3,h4 {
+
+}
 .tweet-form {
+  margin:20px;
+  box-shadow: 3px 3px 2px rgb(210,210,210);
+}
+#tweet-info {
   font-family: 'Montserrat', sans-serif;
+}
+#tweet-username {
+  font-weight: bold;
+}
+#tweet-img {
+  margin: 5px;
+  border-radius: 5px;
+}
+#tweet-scname {
+  color:grey;
+}
+#tweet-text {
+  font-size:12px;
+  font-family: 'Lato', sans-serif;
+}
+#top-form-header {
+  padding-top: 20px;
+  padding-bottom:20px;
+  font-size:24px;
+  font-family: 'Lato', sans-serif;
+  color: white;
+  background-color: #008B78;
 }

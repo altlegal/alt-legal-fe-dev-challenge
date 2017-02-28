@@ -20798,23 +20798,27 @@ var Main = function (_React$Component) {
         { className: 'main' },
         _react2.default.createElement(_search2.default, null),
         _react2.default.createElement(
-          _reactBootstrap.Row,
-          null,
+          'div',
+          { className: 'main-tweet' },
           _react2.default.createElement(
-            _reactBootstrap.Col,
-            { xs: 6, md: 4 },
-            '1 of 3',
-            _react2.default.createElement(_tweetform2.default, { data: this.state.tweets, tag: this.state.search })
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Col,
-            { xs: 6, md: 4 },
-            '2 of 3'
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Col,
-            { xs: 6, md: 4 },
-            '3 of 3'
+            _reactBootstrap.Row,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { xs: 6, md: 4 },
+              '1 of 3',
+              _react2.default.createElement(_tweetform2.default, { data: this.state.tweets, tag: this.state.search })
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { xs: 6, md: 4 },
+              '2 of 3'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { xs: 6, md: 4 },
+              '3 of 3'
+            )
           )
         )
       );
@@ -21076,26 +21080,41 @@ var TweetForm = function (_React$Component) {
         console.log('###tweets###', tweets);
         if (tweets.length >= 0) {
           return tweets.map(function (tweet, i) {
-            return _react2.default.createElement(
-              _reactBootstrap.ListGroupItem,
-              { key: i },
-              _react2.default.createElement('img', { src: tweet.img }),
-              _react2.default.createElement(
-                'h1',
-                null,
-                tweet.username
-              ),
-              _react2.default.createElement(
-                'h2',
-                null,
-                tweet.name
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                tweet.text
-              )
-            );
+            if (i < 5) {
+              return _react2.default.createElement(
+                _reactBootstrap.ListGroupItem,
+                { key: i },
+                _react2.default.createElement(
+                  _reactBootstrap.Row,
+                  null,
+                  _react2.default.createElement(
+                    _reactBootstrap.Col,
+                    { xs: 3, md: 2 },
+                    _react2.default.createElement('img', { id: 'tweet-img', src: tweet.img })
+                  ),
+                  _react2.default.createElement(
+                    _reactBootstrap.Col,
+                    { xs: 15, md: 10, id: 'tweet-info' },
+                    _react2.default.createElement(
+                      'span',
+                      { id: 'tweet-username' },
+                      tweet.username
+                    ),
+                    _react2.default.createElement(
+                      'span',
+                      { id: 'tweet-scname' },
+                      ' ',
+                      tweet.screen_name
+                    ),
+                    _react2.default.createElement(
+                      'p',
+                      { id: 'tweet-text' },
+                      tweet.text
+                    )
+                  )
+                )
+              );
+            }
           });
         }
       };
@@ -21106,22 +21125,17 @@ var TweetForm = function (_React$Component) {
         _react2.default.createElement(
           _reactBootstrap.ListGroup,
           null,
-          _react2.default.createElement(_reactBootstrap.ListGroupItem, { header: '#' + this.props.tag }),
+          _react2.default.createElement(
+            _reactBootstrap.ListGroupItem,
+            { id: 'top-form-header' },
+            '  ',
+            '#' + this.props.tag
+          ),
           listTweets(this.props.data),
           _react2.default.createElement(
             _reactBootstrap.ListGroupItem,
             null,
             'Item 1'
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.ListGroupItem,
-            null,
-            'Item 2'
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.ListGroupItem,
-            null,
-            '...'
           )
         )
       );

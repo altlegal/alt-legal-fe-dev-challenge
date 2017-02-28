@@ -12,12 +12,23 @@ const client = new Twitter({
 
 console.log("############ tAPI ###########")
 module.exports = {
-  status: {
-    get: (req, res) => {
-      var params = { screen_name: 'nodejs' };
-      client.get('statuses/user_timeline', params, (error, tweets, response) => {
+  tweets: {
+    post: (req, res) => {
+      console.log('req.body.hashtag: ', req.body.hashtag)
+      client.get('search/tweets', {q: req.body.hashtag, lang: "en"}, (error, tweets, response) => {
         if (error) console.log('Error Message: ', error)
-        res.send(tweets);
+        // Break down tweet into a more comprehensive JSONX Object
+        let result = [];
+        tweets.statuses.forEach((tweet) => {
+          let tweetInfo = {
+            screen_name: '@' + tweet.user.screen_name,
+            username: tweet.user.name,
+            text: tweet.text,
+            img: tweet.user.profile_image_url,
+          }
+          result.push(tweetInfo)
+        })
+        res.status(200).send(result);
       })
     }
   },

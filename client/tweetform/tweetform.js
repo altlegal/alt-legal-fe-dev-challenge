@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Col, Row } from 'react-bootstrap';
 
 class TweetForm extends React.Component {
   constructor(props) {
@@ -32,16 +32,22 @@ class TweetForm extends React.Component {
       console.log('###tweets###', tweets)
       if(tweets.length >= 0){
         return tweets.map((tweet, i) => {
-          return (
-            <ListGroupItem key={i}>
-              <img src={tweet.img}></img>
-              <h1>{tweet.username}</h1>
-              <h2>{tweet.name}</h2>
-              <p>{tweet.text}</p>
-
-
-            </ListGroupItem>
-          )
+          if(i < 5) {
+            return (
+              <ListGroupItem key={i}>
+                <Row>
+                  <Col xs={3} md={2}>
+                  <img id="tweet-img" src={tweet.img}></img>
+                 </Col>
+                  <Col xs={15} md={10} id="tweet-info">
+                      <span id="tweet-username">{tweet.username}</span>
+                      <span id="tweet-scname"> {tweet.screen_name}</span>
+                    <p id="tweet-text">{tweet.text}</p>
+                  </Col>
+                </Row>
+              </ListGroupItem>
+            )
+          }
         })
       }
     }
@@ -49,11 +55,9 @@ class TweetForm extends React.Component {
     return (
       <div className="tweet-form">
         <ListGroup>
-          <ListGroupItem header={'#' + this.props.tag}></ListGroupItem>
+          <ListGroupItem id="top-form-header">  {'#' + this.props.tag}</ListGroupItem>
           {listTweets(this.props.data)}
           <ListGroupItem>Item 1</ListGroupItem>
-          <ListGroupItem>Item 2</ListGroupItem>
-          <ListGroupItem>...</ListGroupItem>
         </ListGroup>
       </div>
     )

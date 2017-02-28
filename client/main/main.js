@@ -47,19 +47,21 @@ class Main extends React.Component {
     return (
       <div className="main">
         <SearchBar />
-        <Row>
-          <Col xs={6} md={4}>
-            1 of 3
-            <TweetForm data={this.state.tweets} tag={this.state.search}/>
-          </Col>
-          <Col xs={6} md={4}>
-            2 of 3
-            {/* <TweetForm /> */}
-          </Col>
-          <Col xs={6} md={4}>
-            3 of 3
-          </Col>
-        </Row>
+          <div className="main-tweet">
+          <Row>
+            <Col xs={6} md={4}>
+              1 of 3
+              <TweetForm data={this.state.tweets} tag={this.state.search}/>
+            </Col>
+            <Col xs={6} md={4}>
+              2 of 3
+              {/* <TweetForm /> */}
+            </Col>
+            <Col xs={6} md={4}>
+              3 of 3
+            </Col>
+          </Row>
+        </div>
       </div>
     )
   }
