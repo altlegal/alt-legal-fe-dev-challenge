@@ -1,32 +1,35 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { ListGroup, ListGroupItem, Col, Row } from 'react-bootstrap';
+import { Button, ListGroup, ListGroupItem, Col, Row } from 'react-bootstrap';
 
 class TweetForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      tag: ""
     }
+    this._deleteData = this._deleteData.bind(this)
+  }
+  componentWillMount() {
+
   }
   componentWillReceiveProps() {
     this.setState({
-      data: this.props.data
+      tag: this.props.tag
     })
   }
+  _deleteData = (event) => {
+    localStorage.setItem('search', '')
+    localStorage.setItem('tweets', '[]')
+    this.props.handler(event)
+    this.props.search()
+  }
+
   render() {
+    console.log("tweetbox", this.props.data)
     // Create a custom function
     // Gets a tweet data with specific hashtag
     // For each message with hash tag return as Listgroup Item
-    /* Get Trending Hashtags */
-    // const listTrends = (trends) => {
-    //   console.log('###data##', trends)
-    //   if(trends.length >= 0){
-    //     return trends.map((trend, i) => {
-    //       return <ListGroupItem key={i}>{trend.name}</ListGroupItem>
-    //     })
-    //   }
-    // }
     /* Get Tweets from the selected hashtag */
     const listTweets = (tweets) => {
       console.log('###tweets###', tweets)
@@ -48,19 +51,24 @@ class TweetForm extends React.Component {
               </ListGroupItem>
             )
           }
-        })
+        }, this)
       }
     }
-    console.log('props', this.props.data)
     return (
-      <div className="tweet-form">
+      <div className="tweet-form" id="tweet-form">
         <ListGroup>
-          <ListGroupItem id="top-form-header">  {'#' + this.props.tag}</ListGroupItem>
+          <ListGroupItem id="top-form-header">
+            {'#' + this.props.tag}
+            <Button id="delete-btn" bsSize="small" bsStyle="danger" onClick={this._deleteData}> Delete </Button>
+          </ListGroupItem>
           {listTweets(this.props.data)}
-          <ListGroupItem>Item 1</ListGroupItem>
         </ListGroup>
       </div>
     )
   }
 }
 export default TweetForm;
+/* <ListGroupItem id="top-form-header">
+  {'#' + this.props.tag}
+  <button className="warning" onClick={this._deleteData}> Delete </button>
+</ListGroupItem> */

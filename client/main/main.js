@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import SearchBar from '../search/search.js';
 import TweetForm from '../tweetform/tweetform.js';
+import TweetBox from '../tweetbox/tweetbox.js';
 
 class Main extends React.Component {
   constructor(props) {
@@ -11,25 +12,24 @@ class Main extends React.Component {
     this.state = {
       search: '', // Keyword search
       trends: [], // Trending Tags we want to know
-      tweets: []// Tweets related to the hashtag
+      tweets: [], // Tweets related to the hashtag
+      hashes: [],
+      watchlists: {
+        watchlist1: { tweets: [] , tag: ''},
+        watchlist2: { tweets: [] , tag: ''},
+        watchlist3: { tweets: [] , tag: ''}
+      } // Hashtags we are keeping track of
     }
+    this.deleteHandler = this.deleteHandler.bind(this)
     this.getTrends = this.getTrends.bind(this);
     this.getTweets = this.getTweets.bind(this);
     this.handler = this.handler.bind(this);
   }
   componentWillMount() {
-    // if(localStorage.getItem('tweets').length > 0){
-      // this.setState({ tweets: localStorage.getItem('tweets') })
-    // }
-    if(localStorage.search){
-      this.setState({ search: localStorage.getItem('query')})
-    }
-    this.getTrends();
-    this.getTweets();
-  }
-  componentWillUpdate() {
-    console.log(localStorage)
-    console.log('update occur')
+    localStorage.setItem('tweets', '[]')
+    localStorage.setItem('search','')
+    // if(localStorage.search){ this.setState({ search: localStorage.getItem('query') }) }
+    this.getTrends(); // Get Trending Data in U.S for Autocomplete
   }
   /* GET / POST Requests to Node.js */
   getTrends() {
@@ -42,52 +42,49 @@ class Main extends React.Component {
       console.log(response);
     });
   }
-  // Get tweets based on Hashtag
+  /* Get tweets based on Hashtag */
   getTweets() {
-    console.log('fired get tweets!!!!!!!!!!!')
     axios.post('/api/getTweets', {
       // hashtag: this.state.search
-      hashtag: localStorage.getItem('query')
+      hashtag: localStorage.search
     })
     .then((response) => {
       localStorage.setItem('tweets', JSON.stringify(response.data));
-      console.log('state tweets: ', this.state.tweets)
-      this.setState({ tweets: response.data })
+      this.setState({ search: localStorage.search })
+      // if(this.state.tweets <= 3){
+        this.state.tweets.push({
+          data: response.data,
+          hash: localStorage.search
+        })
+
       console.log('response', response)
       console.log('saved successfully')
     });
   }
   /* end of Get / Post Requests to Node.js */
-  /* Handler for children to update parent later wewew */
+  /* Retrieve Info from localStorage */
+
+  /* Handler for children to update parent later */
   handler(search) {
-    this.setState({
-      search: search
-    })
-    localStorage.setItem('query', search)
     localStorage.setItem('search', search)
-    console.log('state in handler', this.state.search)
     this.getTweets()
+  }
+  deleteHandler(e) {
+    var idx = parseInt(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.key, 10);
+    console.log("BUTTON PRESSED")
+    this.setState(state => {
+            state.tweets.splice(idx, 1);
+            return { tweets: state.tweets };
+        });
+      e.target.parentElement.parentElement.parentElement.parentElement.parentElement.remove()
+
   }
   /* render the components */
   render() {
     return (
       <div className="main">
         <SearchBar options={this.state.trends} updateChild={this.handler}/>
-        <div className="main-tweet">
-          <Row>
-            <Col xs={6} md={4}>
-              1 of 3
-              <TweetForm data={this.state.tweets} tag={localStorage.search} onChange={this.getTweets} />
-            </Col>
-            <Col xs={6} md={4}>
-              2 of 3
-
-            </Col>
-            <Col xs={6} md={4}>
-              3 of 3
-            </Col>
-          </Row>
-        </div>
+        <TweetBox search={this.getTweets} watchlists={this.state.tweets} deleteHandler={this.deleteHandler} tag={localStorage.search} />
       </div>
     )
   }

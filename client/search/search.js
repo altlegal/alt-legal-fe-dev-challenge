@@ -2,42 +2,53 @@ import React from 'react';
 import { render } from 'react-dom';
 import { FormGroup, FormControl, InputGroup } from 'react-bootstrap';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+import $ from 'jquery';
+import AutoComplete from 'material-ui/AutoComplete';
+import TextField from 'material-ui/TextField';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin();
 
 class SearchBar extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      search: ''
+      options: [],
+      search: '',
+      searchText: ''
     }
-    this._handleSearch = this._handleSearch.bind(this)
+    this._handleUpdateInput = this._handleUpdateInput.bind(this)
+    this._handleNewRequest = this._handleNewRequest.bind(this)
   }
-  componentDidUpdate() {
+  /* Handles Event When inputting */
+  _handleUpdateInput = (searchText) => {
+    this.setState({
+      searchText: searchText,
+    });
+  }
 
-  }
-  _handleSearch(query) {
-    console.log("you are searching", query, localStorage)
-    if(!query) {
-      return;
-    }
+  /* Handles Event When Click or Enter */
+  _handleNewRequest = () => {
+    this.props.updateChild(this.state.searchText)
   }
   render() {
+    this.props.options.forEach((element ,index) => {
+      if(element.name[0] === "#") this.state.options.push(element.name);
+    })
     return (
       <div className="search-container">
-        <AsyncTypeahead
-          allowNew
-          labelKey="name"
-          minLength={1}
-          newSelectionPrefix="Search hashtag: #"
-          onInputChange={ text => this.props.updateChild(text) }
-          onSearch={this._handleSearch}
-          options={this.props.options}
-          placeholder="Search a hashtag..."
-          renderMenuItemChildren={(option, props, index) => (
-            <div>
-              <span key={index}>{option.name}</span>
-            </div>
-          )}
-        />
+        <MuiThemeProvider>
+        <AutoComplete
+            label="name"
+            filter={(searchText, key) => searchText !== '' && key.indexOf(searchText) !== -1}
+            searchText={this.state.search}
+            onUpdateInput={this._handleUpdateInput}
+            onNewRequest={this._handleNewRequest}
+            hintText="Search #hashtag..."
+            dataSource={this.state.options}
+            openOnFocus={true}
+          />
+        </MuiThemeProvider>
       </div>
     );
   }
