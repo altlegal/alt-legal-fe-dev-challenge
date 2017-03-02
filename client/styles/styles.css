@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* HTML */
 body {
   background-color: #dddddd;
@@ -10,6 +11,10 @@ body {
 #logo {
 
 }
+=======
+
+/* Navbar Component */
+>>>>>>> 07adb3a568d60abfc808ffa87bdfa27cbe939f87
 .navbar-default {
   margin:0px;
   padding: 16px;
@@ -54,6 +59,7 @@ a:hover #button-signup {
   box-shadow: 2px 2px 1px rgb(210,210,210);
 }
 /* Search Component */
+<<<<<<< HEAD
 .input-box {
   display:inline-block;
   padding:6px;
@@ -64,6 +70,13 @@ a:hover #button-signup {
   width:50%;
   padding:10px;
   /*margin:auto;*/
+=======
+.search-container {
+  font-family: 'Montserrat', sans-serif;
+  width:50%;
+  padding:20px;
+  margin:auto;
+>>>>>>> 07adb3a568d60abfc808ffa87bdfa27cbe939f87
 }
 .input-group-addon {
   font-size: 20px;
@@ -89,7 +102,11 @@ h1,h2,h3,h4 {
 
 }
 .tweet-form {
+<<<<<<< HEAD
   margin:6px;
+=======
+  margin:20px;
+>>>>>>> 07adb3a568d60abfc808ffa87bdfa27cbe939f87
   box-shadow: 3px 3px 2px rgb(210,210,210);
 }
 #tweet-info {
@@ -117,6 +134,9 @@ h1,h2,h3,h4 {
   color: white;
   background-color: #008B78;
 }
+<<<<<<< HEAD
 #delete-btn {
   float:right;
 }
+=======
+>>>>>>> 07adb3a568d60abfc808ffa87bdfa27cbe939f87

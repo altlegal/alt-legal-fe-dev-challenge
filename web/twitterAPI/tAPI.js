@@ -19,6 +19,7 @@ module.exports = {
         if (error) console.log('Error Message: ', error)
         // Break down tweet into a more comprehensive JSONX Object
         let result = [];
+<<<<<<< HEAD
         if(tweets.statuses){
           tweets.statuses.forEach((tweet) => {
             let tweetInfo = {
@@ -33,13 +34,29 @@ module.exports = {
         } else {
           res.send(error)
         }
+=======
+        tweets.statuses.forEach((tweet) => {
+          let tweetInfo = {
+            screen_name: '@' + tweet.user.screen_name,
+            username: tweet.user.name,
+            text: tweet.text,
+            img: tweet.user.profile_image_url,
+          }
+          result.push(tweetInfo)
+        })
+        res.status(200).send(result);
+>>>>>>> 07adb3a568d60abfc808ffa87bdfa27cbe939f87
       })
     }
   },
   trends: {
     get: (req, res) => {
       let hashtags = [];
+<<<<<<< HEAD
       client.get('trends/place', {id: 23424977}, (error, tweets, response) => {
+=======
+      client.get('trends/place', {id: 2459115}, (error, tweets, response) => {
+>>>>>>> 07adb3a568d60abfc808ffa87bdfa27cbe939f87
         if(error) console.log('Error Message: ', error)
         tweets[0].trends.forEach((element, idx) => {
           if(element.name[0] === "#") hashtags.push(element);

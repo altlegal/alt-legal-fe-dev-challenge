@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { FormGroup, FormControl, InputGroup } from 'react-bootstrap';
+<<<<<<< HEAD
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import $ from 'jquery';
 import AutoComplete from 'material-ui/AutoComplete';
@@ -51,6 +52,25 @@ class SearchBar extends React.Component {
         </MuiThemeProvider>
       </div>
     );
+=======
+
+class SearchBar extends React.Component {
+  constructor(){
+    super()
+  }
+
+  render() {
+    return (
+      <div className="search-container">
+        <FormGroup>
+          <InputGroup>
+            <InputGroup.Addon>#</InputGroup.Addon>
+            <FormControl id="searchbar" placeholder="hashTags" type="text" />
+          </InputGroup>
+        </FormGroup>
+      </div>
+    )
+>>>>>>> 07adb3a568d60abfc808ffa87bdfa27cbe939f87
   }
 }
 export default SearchBar;
